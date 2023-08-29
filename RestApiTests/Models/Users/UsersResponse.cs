@@ -8,7 +8,7 @@ namespace RestApiTests.Models.Users
 {
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
     
-    public class UsersResponse
+    internal class UsersResponse
     {
         public int page { get; set; }
         public int per_page { get; set; }
@@ -18,7 +18,7 @@ namespace RestApiTests.Models.Users
         public Support support { get; set; }
     }
 
-    public class Datum
+    internal class Datum
     {
         public int id { get; set; }
         public string email { get; set; }
@@ -28,7 +28,7 @@ namespace RestApiTests.Models.Users
     }
 
 
-    public class Support
+    internal class Support
     {
         public string url { get; set; }
         public string text { get; set; }

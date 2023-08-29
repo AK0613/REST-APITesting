@@ -29,6 +29,20 @@ namespace RestApiTests.TestFixtures
         }
 
         [Test]
+        public void GetSpecificUser()
+        {
+            var url = "https://reqres.in/api/users/";
+            var user = "2";
+            var endpoint = url + user;
+
+            var responseBody = ExecuteGetRequest<SingleUserResponse>(endpoint);
+            responseBody.data.id.Should().Be(2);
+            responseBody.data.first_name.Should().Be("Janet");
+
+
+        }
+
+        [Test]
         public void CreateUsers()
         {
             //Specify endpoint
