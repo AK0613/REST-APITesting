@@ -33,7 +33,7 @@ namespace RestApiTests.TestFixtures
         /// <param name="endpoint"> The endpoint to talk to the API </param>
         /// <param name="payload"> The JSON payload that needs to be sent with the request</param>
         /// <returns></returns>
-        protected T ExecutePostRequest<T>(string endpoint, UsersCreateRequest payload)
+        protected T ExecutePostRequest<T, V>(string endpoint, V payload) where V : class
         {
             // Setup
             var client = new RestClient(endpoint);
@@ -46,5 +46,7 @@ namespace RestApiTests.TestFixtures
             var responseBody = JsonConvert.DeserializeObject<T>(response.Content);
             return responseBody;
         }
+
+
     }
 }

@@ -3,6 +3,8 @@ using Newtonsoft.Json;
 using NUnit.Framework;
 using RestApiTests.Models.Users;
 using RestApiTests.Models.Users.Create;
+using RestApiTests.Models.Users.Login;
+using RestApiTests.Models.Users.Register;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -56,9 +58,38 @@ namespace RestApiTests.TestFixtures
 
             //Verify response status code
 
-            var responseBody = ExecutePostRequest<UsersCreateResponse>(endpoint, payload);
+            var responseBody = ExecutePostRequest<UsersCreateResponse, UsersCreateRequest>(endpoint, payload);
 
             responseBody.id.Should().NotBeNullOrEmpty();
+        }
+
+        [Test]
+        public void RegisterUser()
+        {
+            var endpoint = "https://reqres.in/api/register";
+            var payload = new RegisterUserRequest
+            {
+                email = "eve.holt@reqres.in",
+                password = "LePass"
+            };
+
+            var responseBody = ExecutePostRequest<RegisterUserResponse, RegisterUserRequest>(endpoint, payload);
+            responseBody.token.Should().NotBeNull();
+        }
+
+        [Test]
+        public void Login()
+        {
+            var endpoint = "https://reqres.in/api/login";
+            var payload = new LoginRequest
+            {
+                email = "eve.holt@reqres.in",
+                password = "LePass"
+            };
+
+            var ResponseBody = ExecutePostRequest<LoginResponse, LoginRequest>(endpoint, payload);
+            ResponseBody.token.Should().NotBeNull();
+
         }
     }
 }
