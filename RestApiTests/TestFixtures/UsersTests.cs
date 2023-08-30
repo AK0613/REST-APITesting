@@ -87,9 +87,21 @@ namespace RestApiTests.TestFixtures
                 password = "LePass"
             };
 
-            var ResponseBody = ExecutePostRequest<LoginResponse, LoginRequest>(endpoint, payload);
-            ResponseBody.token.Should().NotBeNull();
+            var responseBody = ExecutePostRequest<LoginResponse, LoginRequest>(endpoint, payload);
+            responseBody.token.Should().NotBeNull();
+        }
 
+        [Test]
+        public void LoginError_Expected()
+        {
+            var endpoint = "https://reqres.in/api/login";
+            var payload = new LoginRequest
+            {
+                email = "eve.holt@reqres.in",
+            };
+
+            var responseBody = ExecutePostRequest<LoginErrorResponse, LoginRequest>(endpoint, payload);
+            responseBody.error.Should().Be("Missing password");
         }
     }
 }
